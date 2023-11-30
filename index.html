@@ -1,0 +1,50 @@
+<html>
+<head>
+
+	<style>
+		.qr{
+			margin: 10px;
+			display: flex;
+		}
+	</style>
+<title>Harry's Amazing Barcode Generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="qrcode.min.js"></script>
+</head>
+<body>
+<textarea id="text" type="text" style="width:20%" ></textarea><br />
+<button onclick="makeCode()">Click me</button>
+<div id="qrcode"  style="display:flex; flex-wrap: wrap; margin-top: 100px;"></div>
+<script type="text/javascript">
+function makeCode () {	
+	var elText = document.getElementById("text");
+	var splittext = elText.value.split("\n");
+	if (!elText.value) {
+		alert("Input a text");
+		elText.focus();
+		return;
+	}
+	const qrcodenode = document.getElementById("qrcode");
+	  while (qrcodenode.firstChild) {
+		qrcodenode.removeChild(qrcodenode.lastChild);
+	  }
+	splittext.forEach(element => {
+		if (element != undefined)
+		{
+		var div = document.createElement("div") 
+		div.className = "qr"
+		document.getElementById("qrcode").appendChild(div);
+		var qrcode = new QRCode(div, {
+			width : 100,
+			height : 100,
+		});
+	}
+		
+		qrcode.makeCode(element);
+
+	});
+}
+</script>
+</body>
