@@ -3,8 +3,12 @@
 
 	<style>
 		.qr{
-			margin: 10px;
+			margin: 25px;
 			display: flex;
+			width: 100px;
+			flex-wrap: wrap;
+			align-content: center;
+			justify-content: center;
 		}
 	</style>
 <title>Harry's Amazing Barcode Generator</title>
@@ -31,8 +35,9 @@ function makeCode () {
 		qrcodenode.removeChild(qrcodenode.lastChild);
 	  }
 	splittext.forEach(element => {
-		if (element != undefined)
-		{
+		if (element != undefined && element != "")
+		{	
+		
 		var div = document.createElement("div") 
 		div.className = "qr"
 		document.getElementById("qrcode").appendChild(div);
@@ -40,9 +45,14 @@ function makeCode () {
 			width : 100,
 			height : 100,
 		});
+		var textdiv = document.createElement("p")
+		div.appendChild(textdiv)
+		const text = document.createTextNode(element);
+		textdiv.appendChild(text);
+		textdiv.className = "data"
+		qrcode.makeCode(element);
 	}
 		
-		qrcode.makeCode(element);
 
 	});
 }
